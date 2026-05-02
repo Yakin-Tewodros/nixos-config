@@ -35,18 +35,42 @@ in
 
 # ################################################################################
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 14d";
-  };
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 14d";
+    };
 
-  nix.optimise = {
-    automatic = true;
-    dates = [ "weekly" ];
-  };
+    optimise = {
+      automatic = true;
+      dates = [ "weekly" ];
+    };
 
-  nix.settings.auto-optimise-store = true;
+    settings = {
+
+      auto-optimise-store = true;
+#     max-jobs = 4;
+#     cores = 0;
+#     max-substitution-jobs = 16;
+#     http-connections = 50;
+
+      substituters = [
+        "https://cache.nixos.org"
+        "https://nix-community.cachix.org"
+        "https://mirror.sjtu.edu.cn/nix-channels/store" # Shanghai Jiao Tong University - best for Asia
+        "https://mirrors.ustc.edu.cn/nix-channels/store" # USTC backup mirror
+        # "https://hyprland.cachix.org"
+        # "https://aseipp-nix-cache.global.ssl.fastly.net"
+      ];
+
+#     trusted-public-keys = [
+#       "cache.nixos.org-1:6NCHdD59X431o0gWypbQdK5ZPzZp9Yq+1pP7o0f6tqM="
+#       "nix-community.cachix.org-1:mB9FSKXESj1v3Yv1fR8Fv1LkzG4lWc5h9b6Ew9R0Z9o="
+#     ];
+
+    };
+  };
 
   fonts = {
     enableDefaultPackages = true;
@@ -54,7 +78,6 @@ in
   
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
   
     fontconfig.defaultFonts = {
@@ -62,14 +85,6 @@ in
     };
   };
 
-# nix.settings.substituters = [
-# #           "https://mirror.sjtu.edu.cn/nix-channels/store" # Shanghai Jiao Tong University - best for Asia
-#           "https://mirrors.ustc.edu.cn/nix-channels/store" # USTC backup mirror
-#           "https://cache.nixos.org" # Official global cache
-#           "https://nix-community.cachix.org" # Community packages
-#           # "https://hyprland.cachix.org"
-#           # "https://aseipp-nix-cache.global.ssl.fastly.net"
-#         ];
 
 # ################################################################################
 
@@ -160,10 +175,6 @@ in
       nvidiaBusId = "PCI:1:0:0";
     };
   };
-  services.udev.extraRules = ''
-    # Enable runtime PM for NVIDIA GPU
-    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{power/control}="auto"
-  '';
 
   #  boot.extraModprobeConfig = ''
   #    options nvidia NVreg_DynamicPowerManagement=0x02
@@ -186,7 +197,7 @@ in
 	qbittorrent gimp koreader qimgv gparted firefox-devedition
 	scrcpy czkawka-full 
       # Dev
-        jetbrains.idea netbeans filezilla vscode distrobox
+        filezilla vscode distrobox # jetbrains.idea netbeans
       # Dev Tools
         gcc lazygit nodejs docker-compose cmake python3
 	php phpPackages.composer mariadb
@@ -201,7 +212,7 @@ in
         wl-clipboard btop qemu_full yt-dlp fzf fd ripgrep ntfs3g lsd trash-cli 
 	bat kdePackages.ark unrar-wrapper unzip p7zip gzip pkg-config 
 	kdePackages.kimageformats libheif fish go gdb gnumake bzip2 xz 
-	ffmpeg-full bibata-cursors-translucent bibata-cursors
+	ffmpeg-full bibata-cursors # bibata-cursors-translucent 
       ];
   };
 
@@ -316,8 +327,19 @@ in
   hardware.uinput.enable = true;
   # Set up udev rules for uinput
   services.udev.extraRules = ''
-    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
-  '';
+  # Enable runtime PM for NVIDIA GPU
+  ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{power/control}="auto"
+
+  # uinput device rule
+  KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+'';
+# services.udev.extraRules = ''
+#   # Enable runtime PM for NVIDIA GPU
+#   ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{power/control}="auto"
+# '';
+# services.udev.extraRules = ''
+#   KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+# '';
   # Ensure the uinput group exists
   users.groups.uinput = { };
   # Add the Kanata service user to necessary groups
