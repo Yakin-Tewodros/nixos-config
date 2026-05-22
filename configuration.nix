@@ -151,13 +151,6 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda"; # or "rocm"
-  };
-
-  services.open-webui.enable = true;
-
   # Enable flatpak
   services.flatpak.enable = true;
 
