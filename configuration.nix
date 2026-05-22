@@ -6,7 +6,7 @@
 let
 home-manager = builtins.fetchTarball {
   url = "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
-  sha256 = "16mcnqpcgl3s2frq9if6vb8rpnfkmfxkz5kkkjwlf769wsqqg3i9";
+  sha256 = "13sahz1mxbk7n67jvz9fi0f85ax7l6s3ffiwa6x0rfrwfwhgj7x3";
 };
 in
 {
@@ -150,6 +150,13 @@ in
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
+
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda"; # or "rocm"
+  };
+
+  services.open-webui.enable = true;
 
   # Enable flatpak
   services.flatpak.enable = true;
