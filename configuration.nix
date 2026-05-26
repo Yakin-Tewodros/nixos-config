@@ -6,7 +6,7 @@
 let
 home-manager = builtins.fetchTarball {
   url = "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
-  sha256 = "13sahz1mxbk7n67jvz9fi0f85ax7l6s3ffiwa6x0rfrwfwhgj7x3";
+  sha256 = "13fmry1jd0na71fxhzms9qf3ybj6shgvnphq4p1akxxmv44gzq20";
 };
 in
 {
@@ -151,6 +151,14 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  services.ollama = {
+    enable = true;
+    # loadModels = [ "llama3.2:3b" "deepseek-r1:1.5b"];
+    package = pkgs.ollama-cuda;
+  };
+
+  services.open-webui.enable = true;
+
   # Enable flatpak
   services.flatpak.enable = true;
 
@@ -195,7 +203,7 @@ in
       # Tools
         mpv kitty nethogs easyeffects telegram-desktop fsearch obsidian 
 	qbittorrent gimp koreader qimgv gparted firefox-devedition
-	scrcpy czkawka-full 
+	scrcpy czkawka-full file
       # Dev
         filezilla vscode distrobox # jetbrains.idea netbeans
       # Dev Tools
