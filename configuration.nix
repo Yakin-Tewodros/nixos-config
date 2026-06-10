@@ -208,7 +208,7 @@ in
         filezilla vscode distrobox # jetbrains.idea netbeans
       # Dev Tools
         gcc lazygit nodejs docker-compose cmake python3
-	php phpPackages.composer mariadb
+	php phpPackages.composer mariadb alpaca
       # QoL
         pop-launcher kanata 
       # Fonts
@@ -440,7 +440,7 @@ in
   programs.fish.enable = true;
   
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
