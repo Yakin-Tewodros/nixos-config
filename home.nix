@@ -19,7 +19,6 @@
 
   home.shellAliases = {
     ll = "ls -l";
-    hello = "echo hello home manager";
     nrs = "sudo nixos-rebuild switch";
   };
 
@@ -102,8 +101,8 @@ home.sessionVariables = {
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; # Fixes OpenURI and cursor themes in flatpaks
     config = {
       common.default = "*"; # Use default portal backend selection method
-#     # example with hyprland
-#     #hyprland.preferred = [ "Fuchsia-Pop" "gtk" ];
+      # example with hyprland
+      # hyprland.preferred = [ "Fuchsia-Pop" "gtk" ];
     };
     configPackages = [
       pkgs.xdg-desktop-portal-gtk # Ensure this portal is available

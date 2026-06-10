@@ -13,6 +13,7 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # Add homemanager
       (import "${home-manager}/nixos")
     ];
 
@@ -36,11 +37,12 @@ in
 # ################################################################################
 
   nix = {
-    # gc = {
-    #   automatic = true;
-    #   dates = "weekly";
-    #   options = "--delete-older-than 14d";
-    # };
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 14d";
+    };
 
     optimise = {
       automatic = true;
@@ -166,13 +168,6 @@ in
   # Enable flatpak
   services.flatpak.enable = true;
 
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/user/my-nixos-config"; # sets NH_OS_FLAKE variable for you
-  };
-
   # Graphics
   services.xserver.enable = true;
   hardware.graphics.enable = true;
@@ -211,6 +206,8 @@ in
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "podman" ];
     shell = pkgs.fish;
     packages = with pkgs; [
+      # Nix Tools
+      # nix-output-monitor cabal-install
       # Tools
         mpv kitty nethogs easyeffects telegram-desktop fsearch obsidian 
 	qbittorrent gimp koreader qimgv gparted firefox-devedition
