@@ -216,7 +216,7 @@ in
         filezilla vscode distrobox # jetbrains.idea netbeans
       # Dev Tools
         gcc lazygit nodejs docker-compose cmake python3
-	php phpPackages.composer mariadb alpaca
+	php phpPackages.composer mariadb
       # QoL
         pop-launcher kanata 
       # Fonts
