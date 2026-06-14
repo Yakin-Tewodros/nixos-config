@@ -64,16 +64,14 @@ in
       substituters = [
         "https://cache.nixos.org"
         "https://nix-community.cachix.org"
-        "https://mirror.sjtu.edu.cn/nix-channels/store" # Shanghai Jiao Tong University - best for Asia
-        "https://mirrors.ustc.edu.cn/nix-channels/store" # USTC backup mirror
         # "https://hyprland.cachix.org"
         # "https://aseipp-nix-cache.global.ssl.fastly.net"
       ];
 
-#     trusted-public-keys = [
-#       "cache.nixos.org-1:6NCHdD59X431o0gWypbQdK5ZPzZp9Yq+1pP7o0f6tqM="
-#       "nix-community.cachix.org-1:mB9FSKXESj1v3Yv1fR8Fv1LkzG4lWc5h9b6Ew9R0Z9o="
-#     ];
+      # trusted-public-keys = [
+      #   "cache.nixos.org-1:6NCHdD59X431o0gWypbQdK5ZPzZp9Yq+1pP7o0f6tqM="
+      #   "nix-community.cachix.org-1:mB9FSKXESj1v3Yv1fR8Fv1LkzG4lWc5h9b6Ew9R0Z9o="
+      # ];
 
     };
   };
