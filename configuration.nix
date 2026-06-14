@@ -136,6 +136,17 @@ in
     variant = "";
   };
 
+  services.logind.settings = {
+    Login = {
+      HandleLidSwitch = "suspend-then-hibernate";
+      HandleLidSwitchDocked = "suspend-then-hibernate";
+    };
+  };
+  
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=30min
+  '';
+  
   # services.printing.enable = true; # Enable CUPS to print documents.
 
   # Enable sound with pipewire.
