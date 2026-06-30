@@ -109,5 +109,34 @@ home.sessionVariables = {
     ];
   };
 
+  dconf.settings = {
+    # Register custom shortcuts (must include ALL of them)
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+      ];
+    };
+  
+    # Built-in GNOME shortcuts
+    "org/gnome/desktop/wm/keybindings" = {
+      close = [ "<Super>q" ];
+      toggle-fullscreen = [ "<Super>F11" ];
+    };
+  
+    # Super+T → kitty
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      name = "Open Kitty";
+      command = "kitty";
+      binding = "<Super>t";
+    };
+  
+    # Super+E → Home folder
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      name = "Home Folder";
+      command = "nautilus ~";
+      binding = "<Super>e";
+    };
+  };
 
 }

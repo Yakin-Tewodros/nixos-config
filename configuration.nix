@@ -66,8 +66,6 @@ in
       substituters = [
         "https://cache.nixos.org"
         "https://nix-community.cachix.org"
-        # "https://hyprland.cachix.org"
-        # "https://aseipp-nix-cache.global.ssl.fastly.net"
       ];
 
       # trusted-public-keys = [
