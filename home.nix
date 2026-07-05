@@ -120,7 +120,10 @@ home.sessionVariables = {
   
     # Built-in GNOME shortcuts
     "org/gnome/desktop/wm/keybindings" = {
-      close = [ "<Super>q" ];
+      close = [ 
+        "<Super>q"
+        "<Alt>F4"
+      ];
       toggle-fullscreen = [ "<Super>F11" ];
     };
   

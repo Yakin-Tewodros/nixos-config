@@ -219,8 +219,7 @@ in
       # nix-output-monitor cabal-install
       # Tools
         mpv kitty nethogs easyeffects telegram-desktop fsearch obsidian 
-	qbittorrent gimp koreader qimgv gparted firefox-devedition
-	scrcpy czkawka-full file
+	qbittorrent gimp koreader qimgv gparted scrcpy czkawka-full file
       # Dev
         filezilla vscode distrobox # jetbrains.idea netbeans
       # Dev Tools
