@@ -4,10 +4,11 @@
 
 { config, pkgs, ... }:
 let
-home-manager = builtins.fetchTarball {
-  url = "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
-  sha256 = "13fmry1jd0na71fxhzms9qf3ybj6shgvnphq4p1akxxmv44gzq20";
-};
+  home-manager = builtins.fetchTarball {
+    url = "https://github.com/nix-community/home-manager/archive/release-26.05.tar.gz";
+    sha256 = "1pk2mv3wyj57zbdl8nh3m635midic6sa0cc20xn2h364s6w2f90i";
+
+  };
 in
 {
   imports =
@@ -73,6 +74,11 @@ in
       #   "nix-community.cachix.org-1:mB9FSKXESj1v3Yv1fR8Fv1LkzG4lWc5h9b6Ew9R0Z9o="
       # ];
 
+      # trusted-public-keys = [
+      #   "cache.nixos.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      #   "nix-community.cachix.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      # ];
+
     };
   };
 
@@ -134,16 +140,20 @@ in
     variant = "";
   };
 
-  services.logind.settings = {
-    Login = {
-      HandleLidSwitch = "suspend-then-hibernate";
-      HandleLidSwitchDocked = "suspend-then-hibernate";
-    };
-  };
-  
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=30min
-  '';
+  # services.logind.settings = {
+  #   Login = {
+  #     HandleLidSwitch = "suspend-then-hibernate";
+  #     HandleLidSwitchDocked = "suspend-then-hibernate";
+  #   };
+  # };
+
+  # systemd.sleep.settings = {
+  #   Sleep = {
+  #     HibernateDelaySec = "30min";
+  #     # AllowSuspendThenHibernate = true;
+  #     # SuspendState = "mem";
+  #   };
+  # };
   
   # services.printing.enable = true; # Enable CUPS to print documents.
 
@@ -226,12 +236,12 @@ in
         gcc lazygit nodejs docker-compose cmake python3
 	php phpPackages.composer mariadb
       # QoL
-        pop-launcher kanata 
+        kanata pop-launcher
       # Fonts
         nerd-fonts.jetbrains-mono
       # Gnome
-        gnome-extension-manager gnome-tweaks gnomeExtensions.pop-shell gdm-settings
-        dconf-editor 
+        gnome-extension-manager gnome-tweaks gdm-settings
+        dconf-editor gnomeExtensions.pop-shell 
       # Utilities
         wl-clipboard btop qemu_full yt-dlp fzf fd ripgrep ntfs3g lsd trash-cli 
 	bat kdePackages.ark unrar-wrapper unzip p7zip gzip pkg-config 
@@ -279,6 +289,12 @@ in
   programs.git.enable = true;
   programs.java.enable = true;
   programs.neovim.enable = true;
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+    ];
+  };
 
   environment = {
     variables = { EDITOR = "nvim"; VISUAL = "nvim"; };

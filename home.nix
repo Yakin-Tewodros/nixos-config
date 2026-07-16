@@ -20,12 +20,13 @@
   home.shellAliases = {
     ll = "ls -l";
     nrs = "sudo nixos-rebuild switch";
+    nrsu = "sudo nixos-rebuild switch --upgrade";
   };
 
   programs.kitty = {
     enable = true;
     settings = {
-      confirm_os_window_close = 0;
+      # confirm_os_window_close = 0;
       enable_audio_bell = false;
       mouse_hide_wait = "-1.0";
       window_padding_width = 15;
@@ -137,7 +138,7 @@ home.sessionVariables = {
     # Super+E → Home folder
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
       name = "Home Folder";
-      command = "nautilus ~";
+      command = "nautilus";
       binding = "<Super>e";
     };
   };
